@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/51DI_w4M)
 # 1. Theoretical exercise: Local linear regression as a linear smoother
 
 Recall our basic setup: we are given i.i.d. samples $\left(x_i, y_i\right), i=1, \ldots n$ from the model
