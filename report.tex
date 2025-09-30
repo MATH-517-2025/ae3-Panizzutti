@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{bbold}
+\usepackage{placeins}
+\usepackage{graphicx}
+
+% --- Title info ---
+\title{MATH-517: Assignment 3}
+\author{Giorgio Panizzutti}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\section*{1.Theoretical Exercise}
+\subsection*{1.1.}
+The problem is a weighted least squares problem at x:
+\[
+(\hat\beta_0(x),\hat\beta_1(x))
+=\arg\min_{\beta_0,\beta_1\in\mathbb{R}}
+\sum_{i=1}^n \left(Y_i-\beta_0-\beta_1(X_i-x)\right)^2
+K\left(\frac{X_i-x}{h}\right).
+\]
+with
+\[
+X=\begin{pmatrix}
+1 & X_1-x\\
+\vdots & \vdots\\
+1 & X_n-x
+\end{pmatrix},\quad
+W=\mathrm{diag}(K\left(\frac{X_1-x}{h}\right),\ldots,K\left(\frac{X_n-x}{h}\right)),\quad
+Y=\begin{pmatrix}Y_1\\ \vdots\\ Y_n\end{pmatrix}.
+\]
+The problem can be rewritten as
+\[
+(\hat\beta_0(x),\hat\beta_1(x))
+=\arg\min_{\beta_0,\beta_1\in\mathbb{R}}
+(Y-X\beta)^{\top}W(Y-X\beta),
+\]
+The weighted least squares solution is
+\[
+\begin{pmatrix}\hat\beta_0(x)\\ \hat\beta_1(x)\end{pmatrix}
+=(X^{\top}WX)^{-1}X^{\top}WY.
+\]
+Let \(e_1=(1,0)^{\top}\). Then
+\[
+\hat m(x)=\hat\beta_0(x)=e_1^{\top}(X^{\top}WX)^{-1}X^{\top}WY
+=\sum_{i=1}^n w_{ni}(x)\,Y_i,
+\]
+where \(w_{ni}(x)\) is the \(i\)-th entry of the row vector \(e_1^{\top}(X^{\top}WX)^{-1}X^{\top}W\).
+\subsection*{1.2.}
+Using the notation
+\[S_{n,k}(x) = \frac{1}{nh} \sum_{i=1}^n (X_i - x)^k K\left(\frac{X_i-x}{h}\right)\]
+we can write 
+\[X^{\top}WX = nh \begin{pmatrix}
+S_{n,0}(x) & S_{n,1}(x)\\
+S_{n,1}(x) & S_{n,2}(x)
+\end{pmatrix}.\]
+The inverse is
+\[(X^{\top}WX)^{-1} = \frac{1}{nh(S_{n,0}(x)S_{n,2}(x)-S_{n,1}(x)^2)}
+\begin{pmatrix}
+S_{n,2}(x) & -S_{n,1}(x)\\
+-S_{n,1}(x) & S_{n,0}(x)
+\end{pmatrix}.\]
+then 
+\(X^{\top}W\) is the \(2\times n\) matrix
+\[
+X^{\top}W=
+\begin{pmatrix}
+K\left(\frac{X_1-x}{h}\right) & \cdots & K\!\left(\frac{X_n-x}{h}\right)\\
+(X_1-x)K\left(\frac{X_1-x}{h}\right) & \cdots & (X_n-x)K\left(\frac{X_n-x}{h}\right)
+\end{pmatrix}.
+\]
+the product \((X^{\top}WY)^{-1}X^{\top}W\) is then
+\[
+\frac{1}{nh(S_{n,0}(x)S_{n,2}(x)-S_{n,1}(x)^2)}
+\begin{pmatrix}
+(S_{n,2}(x) - (X_1 - x) S_{n,1}(x))K\left(\frac{X_1-x}{h}\right) & \cdots & \\
+(-S_{n,1}(x) + (X_1 - x) S_{n,0}(x))K\left(\frac{X_1-x}{h}\right) & \cdots &
+\end{pmatrix}
+\]
+The \(i\)-th entry of the first row is then
+
+\[
+w_{ni}(x) = \frac{1}{nh}\frac{S_{n,2}(x) - (X_i - x) S_{n,1}(x)}{S_{n,0}(x)S_{n,2}(x)-S_{n,1}(x)^2} K\left(\frac{X_i-x}{h}\right).
+\]
+
+\subsection*{1.3.}
+The sum of the weights is
+\[\sum_{i=1}^n w_{ni}(x) =
+\sum_{i=1}^n w_{ni}(x)
+=\frac{1}{nh}\,
+\frac{S_{n,2}(x)\sum_{i=1}^n K\left(\frac{X_i-x}{h}\right)
+- S_{n,1}(x)\sum_{i=1}^n (X_i-x)K\left(\frac{X_i-x}{h}\right)}
+{S_{n,0}(x)S_{n,2}(x)-S_{n,1}(x)^2}.
+\]
+Since \(\sum_{i=1}^n K\left(\frac{X_i-x}{h}\right)=nh\,S_{n,0}(x)\) and
+\(\sum_{i=1}^n (X_i-x)K\left(\frac{X_i-x}{h}\right)=nh\,S_{n,1}(x)\),
+We have 
+\[\sum_{i=1}^n w_{ni}(x) =
+\frac{S_{n,2}(x)S_{n,0}(x)-S_{n,1}(x)^2}
+{S_{n,0}(x)S_{n,2}(x)-S_{n,1}(x)^2}=1.\]    
+
+\section*{2. Practical Exercise}
+
+
+
+\end{document}
