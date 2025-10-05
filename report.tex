@@ -124,9 +124,9 @@ The regression curve is \(m(x)=\sin((x/3+0.1)^{-1})\).
 
 
 We generate i.i.d. samples \(\{(X_i,Y_i)\}_{i=1}^n\) with \(Y_i=m(X_i)+\varepsilon_i\), \(\varepsilon_i\sim\mathcal N(0,\sigma^2)\).
-To estimate the unknown \(\theta_{22}\) and \(\sigma^2\) we split the sample into \(N\) blocks by quantiles of \(X\) so that each block has (almost) the same number of observations even when \(X\) is skewed. In each block \(j\) we fit
+To estimate the unknown \(\theta_{22}\) and \(\sigma^2\) we split the sample into \(N\) blocks by quantiles of \(X\) so that each block has (almost) the same number of observations even when \(X\) is skewed. In each block \(j\) we fit a quartic polynomial by OLS
 \[
-y=\beta_{0j}+\beta_{1j}x+\beta_{2j}x^2+\beta_{3j}x^3+\beta_{4j}x^4+\epsilon,
+\hat m_j(x)=\beta_{0j}+\beta_{1j}x+\beta_{2j}x^2+\beta_{3j}x^3+\beta_{4j}x^4,
 \]
 and then compute
 \[
@@ -192,9 +192,9 @@ When more mass is in flatter regions, \(\theta_{22}\) is smaller and \(h_{AMISE}
 
 
 \paragraph{Second derivative of \(m\).}
-To better see why \(h_{AMISE}\) varies with the distribution of \(X\), we plot \(m(x)\) and its second derivative \(m''(x)\) on \([0,1]\).
+To better see why \(h_{AMISE}\) varies with the distribution of \(X\), we plot \(m(x)\) and its second derivative \(m''(x)\) (here computed numerically, but can be analytically derived) on \([0,1]\).
 The curvature is highest near \(x=0\) and decreases toward \(x=1\), so \(\theta_{22}=\int m''(x)^2 f_X(x)dx\) increases when more probability mass is placed near \(0\).
-
+This directly shows the impact of the shape of \(X\) on the estimate of the optimal bandwidth calculated using the \(\hat h_{AMISE}\) formula where \(\hat \theta_{22}\) is at the denominator and gets higher when the density of \(X\) has more probability where \(|m''(x)|\) is large.
 \begin{figure}[h]
 \centering
 \includegraphics[width=.9\linewidth]{output/m_and_mpp.png}
